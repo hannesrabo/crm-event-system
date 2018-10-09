@@ -1,5 +1,9 @@
+import EventManagement.EventPlan;
+import EventManagement.EventPlanManager;
 import MenuManagement.Menu;
+import MenuManagement.MenuItems.CreateEventMenuItem;
 import MenuManagement.MenuItems.LogoutMenuItem;
+import MenuManagement.MenuItems.ShowAllEventPlansMenuItem;
 import MenuManagement.MenuItems.TestMenuItem;
 import UserManagement.LoginManager;
 import UserManagement.UserRole;
@@ -13,10 +17,16 @@ public class Main {
     private static void addUserLogins(LoginManager loginManager) {
         loginManager.addUser("hrabo", "1234", UserRole.ProductionManager);
         loginManager.addUser("jcelik", "5678", UserRole.FinancialManager);
+        loginManager.addUser("cso", "1234", UserRole.CustomerServiceOfficer);
+        loginManager.addUser("sco", "1234", UserRole.SeniorCustomerOffice);
     }
 
     private static void addMenuItems(Menu mainMenu) {
         mainMenu.addMenuItem(new TestMenuItem());
+
+        EventPlanManager eventPlanManager = new EventPlanManager();
+        mainMenu.addMenuItem(new CreateEventMenuItem(eventPlanManager));
+        mainMenu.addMenuItem(new ShowAllEventPlansMenuItem(eventPlanManager));
     }
 
     public static void main(String args[]) {
@@ -65,6 +75,7 @@ public class Main {
                     try {
                         // Generate the menu and perform actions.
                         System.out.println(mainMenu.toString());
+                        System.out.print("> ");
                         int menuIdex = Integer.parseInt(bufferedReader.readLine());
                         boolean success = mainMenu.run(menuIdex);
 

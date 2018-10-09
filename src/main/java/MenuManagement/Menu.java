@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public class Menu {
 
     private LinkedList<MenuItem> menuItems;
-    public static String MENU_HEADER = "Menu Items: \n------------------------\n";
+    public static String MENU_HEADER = "=======================\nMenu Items: \n=======================\n";
     private LoginManager loginManager;
 
     public Menu(LoginManager loginManager) {
