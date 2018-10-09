@@ -1,21 +1,66 @@
 import MenuManagement.Menu;
 import MenuManagement.MenuItems.TestMenuItem;
+import UserManagement.LoginManager;
+import UserManagement.UserRole;
 import org.junit.Test;
 
 import static MenuManagement.Menu.MENU_HEADER;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class MenuTest {
 
+    private LoginManager createLoginManager () {
+        LoginManager lm = new LoginManager();
+        String username = "hrabo";
+        String password = "1234";
+        UserRole role = UserRole.ProductionManager;
+
+        lm.addUser(username, password, role);
+        lm.login(username, password);
+
+        username = "jcelik";
+        password = "5678";
+
+        lm.addUser(username, password, UserRole.FinancialManager);
+
+        return lm;
+    }
+
     @Test
     public void TestPrintMenuItems() {
-        Menu m = new Menu();
+        LoginManager lm = createLoginManager();
+        Menu m = new Menu(lm);
         String s = m.toString();
 
         assertEquals(MENU_HEADER, s);
+    }
 
+    @Test
+    public void TestMenuItemRoles() {
         TestMenuItem item = new TestMenuItem();
+        assertFalse(item.isRoleAuthorized(UserRole.ProductionManager));
+        assertTrue(item.isRoleAuthorized(UserRole.FinancialManager));
+    }
+
+    @Test
+    public void TestRoles() {
+        LoginManager lm = createLoginManager();
+        TestMenuItem item = new TestMenuItem();
+
+        Menu m = new Menu(lm);
         m.addMenuItem(item);
+
+        assertEquals(MENU_HEADER, m.toString());
+
+        lm.logout();
+        lm.login("jcelik", "5678");
         assertEquals(MENU_HEADER + "(1): " + item.GetMenuItemName() +"\n", m.toString());
+    }
+
+    @Test
+    public void TestRunFunction() {
+
     }
 }

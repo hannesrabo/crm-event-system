@@ -27,8 +27,8 @@ public class LoginManager {
         return currentUser != null;
     }
 
-    public void addUser(String username, String password) {
-        User newUser = new User(username);
+    public void addUser(String username, String password, UserRole role) {
+        User newUser = new User(username, role);
         newUser.password = password;
         users.add(newUser);
     }
@@ -44,5 +44,9 @@ public class LoginManager {
 
     public void logout() {
         currentUser = null;
+    }
+
+    public UserRole getUserRole() {
+        return currentUser.role;
     }
 }

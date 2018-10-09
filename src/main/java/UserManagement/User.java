@@ -5,25 +5,15 @@ import java.util.LinkedList;
 public class User {
     String userName;
     String password;
+    public UserRole role;
 
-    private LinkedList<UserRole> roles;
-
-    public User(String userName) {
+    public User(String userName, UserRole role) {
         this.userName = userName;
-
-        roles = new LinkedList<UserRole>();
-    }
-
-    public void addUserRole(UserRole role) {
-        roles.add(role);
+        this.role = role;
     }
 
     @Override
     public String toString() {
-        return userName + ": " + roles;
-    }
-
-    public boolean hasUserRole(UserRole role) {
-        return roles.contains(role);
+        return userName + ": " + role;
     }
 }
