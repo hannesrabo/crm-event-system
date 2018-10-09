@@ -61,6 +61,6 @@ public class MenuTest {
 
     @Test
     public void TestRunFunction() {
-
+        assertEquals(true, false);
     }
 }
