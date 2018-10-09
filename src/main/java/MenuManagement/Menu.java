@@ -42,4 +42,23 @@ public class Menu {
     public void addMenuItem(MenuItem testMenuItem) {
         menuItems.add(testMenuItem);
     }
+
+    public boolean run(int menuItemIndex) {
+        int index = 1;
+        for (MenuItem item : menuItems) {
+            if (!item.isRoleAuthorized(loginManager.getUserRole()))
+                continue;
+
+            if (index == menuItemIndex) {
+                item.RunMenuItemFunction();
+                return true;
+            } else if (index >= menuItemIndex) {
+                return false;
+            }
+
+            index++;
+        }
+
+        return false;
+    }
 }

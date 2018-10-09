@@ -1,4 +1,5 @@
 import MenuManagement.Menu;
+import MenuManagement.MenuItems.LogoutMenuItem;
 import MenuManagement.MenuItems.TestMenuItem;
 import UserManagement.LoginManager;
 import UserManagement.UserRole;
@@ -61,6 +62,32 @@ public class MenuTest {
 
     @Test
     public void TestRunFunction() {
-        assertEquals(true, false);
+        LoginManager lm = createLoginManager();
+        TestMenuItem item = new TestMenuItem();
+
+        Menu m = new Menu(lm);
+        m.addMenuItem(item);
+        assertFalse(m.run(0));
+        assertFalse(m.run(1));
+        assertFalse(m.run(2));
+
+        lm.logout();
+        lm.login("jcelik", "5678");
+
+        assertTrue(m.run(1));
+        assertTrue(item.testHasRan);
+    }
+
+    @Test
+    public void TestLogoutMenuItem() {
+        LoginManager lm = createLoginManager();
+        LogoutMenuItem mi = new LogoutMenuItem(lm);
+
+        Menu m = new Menu(lm);
+        m.addMenuItem(mi);
+        assertTrue(lm.userAuthenticated());
+
+        m.run(1);
+        assertFalse(lm.userAuthenticated());
     }
 }

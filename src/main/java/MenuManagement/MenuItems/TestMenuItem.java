@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class TestMenuItem implements MenuItem {
     private ArrayList<UserRole> roles;
+    public boolean testHasRan = false;
 
     public TestMenuItem() {
         roles = new ArrayList<UserRole>();
@@ -17,7 +18,7 @@ public class TestMenuItem implements MenuItem {
     }
 
     public void RunMenuItemFunction() {
-        System.out.println("Running test menu item");
+        System.out.println("Running test menu item"); testHasRan = true;
     }
 
     public boolean isRoleAuthorized(UserRole role) {
