@@ -12,6 +12,8 @@ public class EventPlan {
     private int attendess = 0;
     private int budget = 0;
     private String comment = "";
+    private EventStatus status = EventStatus.NewEventRequest;
+    private String financialFeedback = "";
 
     @Override
     public String toString() {
@@ -68,5 +70,17 @@ public class EventPlan {
 
     public String getName() {
         return clientName;
+    }
+
+    public void setStatus(EventStatus newStatus) {
+        this.status = newStatus;
+    }
+
+    public EventStatus getStatus() {
+        return this.status;
+    }
+
+    public void setFinancialFeedback(String financialFeedback) {
+        this.financialFeedback = financialFeedback;
     }
 }

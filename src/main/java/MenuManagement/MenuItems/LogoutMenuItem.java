@@ -3,7 +3,7 @@ package MenuManagement.MenuItems;
 import UserManagement.LoginManager;
 import UserManagement.UserRole;
 
-public class LogoutMenuItem implements MenuItem {
+public class LogoutMenuItem extends MenuItem {
     private final LoginManager loginManager;
 
     public LogoutMenuItem(LoginManager loginManager) {

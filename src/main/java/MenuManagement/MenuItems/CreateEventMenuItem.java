@@ -6,11 +6,13 @@ import EventManagement.EventPlanType;
 import UserManagement.UserRole;
 import Utils.InputReader;
 
-public class CreateEventMenuItem implements MenuItem {
+public class CreateEventMenuItem extends MenuItem {
     private final EventPlanManager eventPlanManager;
 
     public CreateEventMenuItem(EventPlanManager eventPlanManager) {
         this.eventPlanManager = eventPlanManager;
+
+        addAuthorizedRole(UserRole.CustomerServiceOfficer);
     }
 
     @Override
@@ -20,13 +22,13 @@ public class CreateEventMenuItem implements MenuItem {
 
     @Override
     public void RunMenuItemFunction() {
-        EventPlan ep = new EventPlan();
 
         System.out.println("Create Event: \n" +
                 "------------------------");
 
         try {
-            ep.setEventName(InputReader.readUserInput("Event name"))
+            EventPlan ep = new EventPlan()
+                .setEventName(InputReader.readUserInput("Event name"))
                 .setClient(InputReader.readUserInput("Client Name"))
                 .setEventType(EventPlanType.getEnumFromString(InputReader.readUserInput("Event Type")))
                 .setAttendees(Integer.parseInt(InputReader.readUserInput("Attendees")))
@@ -34,15 +36,10 @@ public class CreateEventMenuItem implements MenuItem {
                 .setComment(InputReader.readUserInput("Comment"));
 //                .setDates(LocalDateTime.of(2018, 01, 01, 18, 00), LocalDateTime.of(2018, 01, 02, 18, 00))
 
+            eventPlanManager.add(ep);
+
         } catch (IllegalArgumentException e) {
             System.out.println("Invalid Number.");
         }
-
-        eventPlanManager.add(ep);
-    }
-
-    @Override
-    public boolean isRoleAuthorized(UserRole role) {
-        return role.equals(UserRole.CustomerServiceOfficer);
     }
 }

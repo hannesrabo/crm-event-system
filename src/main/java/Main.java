@@ -1,10 +1,7 @@
 import EventManagement.EventPlan;
 import EventManagement.EventPlanManager;
 import MenuManagement.Menu;
-import MenuManagement.MenuItems.CreateEventMenuItem;
-import MenuManagement.MenuItems.LogoutMenuItem;
-import MenuManagement.MenuItems.ShowAllEventPlansMenuItem;
-import MenuManagement.MenuItems.TestMenuItem;
+import MenuManagement.MenuItems.*;
 import UserManagement.LoginManager;
 import UserManagement.UserRole;
 
@@ -15,18 +12,21 @@ import java.io.InputStreamReader;
 public class Main {
 
     private static void addUserLogins(LoginManager loginManager) {
-        loginManager.addUser("hrabo", "1234", UserRole.ProductionManager);
-        loginManager.addUser("jcelik", "5678", UserRole.FinancialManager);
         loginManager.addUser("cso", "1234", UserRole.CustomerServiceOfficer);
         loginManager.addUser("sco", "1234", UserRole.SeniorCustomerOffice);
+        loginManager.addUser("fin", "1234", UserRole.FinancialManager);
+        loginManager.addUser("adm", "1234", UserRole.AdministrationDepartmentManager);
     }
 
-    private static void addMenuItems(Menu mainMenu) {
-        mainMenu.addMenuItem(new TestMenuItem());
-
+    private static void addMenuItems(Menu mainMenu, LoginManager loginManager) {
         EventPlanManager eventPlanManager = new EventPlanManager();
+
         mainMenu.addMenuItem(new CreateEventMenuItem(eventPlanManager));
-        mainMenu.addMenuItem(new ShowAllEventPlansMenuItem(eventPlanManager));
+        mainMenu.addMenuItem(new ShowAllEventPlansMenuItem(eventPlanManager, loginManager));
+
+        // Login and exit menu items.
+        mainMenu.addMenuItem(new LogoutMenuItem(loginManager));
+        mainMenu.addMenuItem(new ExitMenuItem());
     }
 
     public static void main(String args[]) {
@@ -41,8 +41,8 @@ public class Main {
 
         // Create the main menu
         Menu mainMenu = new Menu(loginManager);
-        addMenuItems(mainMenu);
-        mainMenu.addMenuItem(new LogoutMenuItem(loginManager));
+        addMenuItems(mainMenu, loginManager);
+
 
         System.out.println("CRM Event System. Welcome!\n" +
                 "-------------------------------\n");
