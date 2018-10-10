@@ -69,7 +69,7 @@ public class EventPlan {
     }
 
     public String getName() {
-        return clientName;
+        return eventName;
     }
 
     public void setStatus(EventStatus newStatus) {

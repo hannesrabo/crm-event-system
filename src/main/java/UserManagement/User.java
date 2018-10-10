@@ -1,7 +1,5 @@
 package UserManagement;
 
-import java.util.LinkedList;
-
 public class User {
     String userName;
     String password;
@@ -15,5 +13,9 @@ public class User {
     @Override
     public String toString() {
         return userName + ": " + role;
+    }
+
+    public String getName() {
+        return userName;
     }
 }
