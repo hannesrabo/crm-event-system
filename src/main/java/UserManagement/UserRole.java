@@ -3,5 +3,9 @@ package UserManagement;
 public enum UserRole {
     ProductionManager,
     FinancialManager,
-    CustomerServiceOfficer, SeniorCustomerOffice, AdministrationDepartmentManager, ProductionStaffMember
+    CustomerServiceOfficer,
+    SeniorCustomerOfficer,
+    AdministrationDepartmentManager,
+    ServiceDepartmentManager,
+    ProductionStaffMember
 }

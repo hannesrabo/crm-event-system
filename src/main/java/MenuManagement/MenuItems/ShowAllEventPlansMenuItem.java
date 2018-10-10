@@ -17,7 +17,7 @@ public class ShowAllEventPlansMenuItem extends MenuItem {
         this.eventPlanManager = eventPlanManager;
         this.loginManager = loginManager;
 
-        addAuthorizedRole(UserRole.SeniorCustomerOffice);
+        addAuthorizedRole(UserRole.SeniorCustomerOfficer);
         addAuthorizedRole(UserRole.CustomerServiceOfficer);
         addAuthorizedRole(UserRole.FinancialManager);
         addAuthorizedRole(UserRole.AdministrationDepartmentManager);
@@ -73,7 +73,7 @@ public class ShowAllEventPlansMenuItem extends MenuItem {
                 System.out.println("(ENTER) Exit");
                 InputReader.readUserInput("waiting");
                 break;
-            case SeniorCustomerOffice:
+            case SeniorCustomerOfficer:
                 if (eventPlan.getStatus().equals(EventStatus.NewEventRequest)) {
                     System.out.println("(1) Approve");
                     System.out.println("(2) Exit");

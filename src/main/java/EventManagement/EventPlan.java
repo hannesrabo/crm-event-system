@@ -9,7 +9,7 @@ public class EventPlan {
     private String clientName = "";
     private EventPlanType eventPlanType = EventPlanType.Unknown;
     private LocalDateTime eventStart = LocalDateTime.now(), eventEnd = LocalDateTime.now();
-    private int attendess = 0;
+    private int attendees = 0;
     private int budget = 0;
     private String comment = "";
     private EventStatus status = EventStatus.NewEventRequest;
@@ -24,11 +24,12 @@ public class EventPlan {
                 "\n--------------------\n",
                 "Client: ", clientName,
                 "\nType: ", eventPlanType.toString(),
-                "\nAttendees: ", Integer.toString(attendess),
+                "\nAttendees: ", Integer.toString(attendees),
                 "\nBudget: ", Integer.toString(budget),
                 "\nFrom: ", dFormat.format(eventStart),
                 "\nTo: ", dFormat.format(eventEnd),
                 "\nComment: ", comment,
+                "\nFinancial feedback: ", financialFeedback,
                 "\n");
     }
 
@@ -54,7 +55,7 @@ public class EventPlan {
     }
 
     public EventPlan setAttendees(int attendees) {
-        this.attendess = attendees;
+        this.attendees = attendees;
         return this;
     }
 

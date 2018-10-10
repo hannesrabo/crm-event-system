@@ -38,7 +38,7 @@ public class EventPlanManager {
         switch (role) {
             case CustomerServiceOfficer:
                 return getEventPlans(EventStatus.NewEventRequest);
-            case SeniorCustomerOffice:
+            case SeniorCustomerOfficer:
                 ArrayList<EventPlan> result = getEventPlans(EventStatus.NewEventRequest);
                 result.addAll(getEventPlans(EventStatus.Approved));
                 return result;

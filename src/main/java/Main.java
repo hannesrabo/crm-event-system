@@ -1,4 +1,3 @@
-import EventManagement.EventPlan;
 import EventManagement.EventPlanManager;
 import MenuManagement.Menu;
 import MenuManagement.MenuItems.*;
@@ -13,7 +12,7 @@ public class Main {
 
     private static void addUserLogins(LoginManager loginManager) {
         loginManager.addUser("cso", "1234", UserRole.CustomerServiceOfficer);
-        loginManager.addUser("sco", "1234", UserRole.SeniorCustomerOffice);
+        loginManager.addUser("sco", "1234", UserRole.SeniorCustomerOfficer);
         loginManager.addUser("fin", "1234", UserRole.FinancialManager);
         loginManager.addUser("adm", "1234", UserRole.AdministrationDepartmentManager);
     }
