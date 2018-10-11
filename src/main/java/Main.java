@@ -1,5 +1,6 @@
 import EventManagement.EventPlanManager;
 import EventManagement.TaskManager;
+import FinancialRequestManagment.FinancialRequestManager;
 import MenuManagement.Menu;
 import MenuManagement.MenuItems.*;
 import UserManagement.LoginManager;
@@ -16,15 +17,21 @@ public class Main {
         loginManager.addUser("sco", "1234", UserRole.SeniorCustomerOfficer);
         loginManager.addUser("fin", "1234", UserRole.FinancialManager);
         loginManager.addUser("adm", "1234", UserRole.AdministrationDepartmentManager);
+        loginManager.addUser("pdm", "1234", UserRole.ProductionManager);
         loginManager.addUser("sdm", "1234", UserRole.ServiceDepartmentMember);
     }
 
     private static void addMenuItems(Menu mainMenu, LoginManager loginManager) {
         EventPlanManager eventPlanManager = new EventPlanManager();
+        FinancialRequestManager financialRequestManager = new FinancialRequestManager();
 
+        // Event requests
         mainMenu.addMenuItem(new CreateEventMenuItem(eventPlanManager));
         mainMenu.addMenuItem(new ShowAllEventPlansMenuItem(eventPlanManager, loginManager));
         mainMenu.addMenuItem(new ListUserTasks(new TaskManager(), loginManager));
+
+        // Financial requests
+        mainMenu.addMenuItem(new CreateFinancialRequestMenuItem(loginManager, financialRequestManager));
 
         // Login and exit menu items.
         mainMenu.addMenuItem(new LogoutMenuItem(loginManager));
