@@ -3,11 +3,13 @@ package FinancialRequestManagment;
 import Utils.Department;
 
 public class FinancialRequest {
-    String name;
-    Department department;
-    String projectReference;
-    int requiredAmount;
-    String reason;
+    private String name;
+    private Department department;
+    private String projectReference;
+    private int requiredAmount;
+    private String reason;
+
+    private FinancialRequestStatus status = FinancialRequestStatus.New;
 
     @Override
     public String toString() {
@@ -18,6 +20,7 @@ public class FinancialRequest {
                 "\nProject Reference: ", projectReference,
                 "\nRequired Amount (SEK): ", Integer.toString(requiredAmount),
                 "\nReason: ", reason,
+                "\nStatus: ", status.toString(),
                 "\n");
     }
 
@@ -46,7 +49,14 @@ public class FinancialRequest {
         return this;
     }
 
+    public FinancialRequest setStatus(FinancialRequestStatus status) {
+        this.status = status;
+        return this;
+    }
+
     public String getName() {
         return name;
     }
+
+    public FinancialRequestStatus getStatus() { return status; }
 }
