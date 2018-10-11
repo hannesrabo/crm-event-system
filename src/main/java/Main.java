@@ -56,7 +56,7 @@ public class Main {
 
         // Financial requests
         mainMenu.addMenuItem(new CreateFinancialRequestMenuItem(loginManager, financialRequestManager));
-        mainMenu.addMenuItem(new ShowFincancialRequestsMenuItem(financialRequestManager));
+        mainMenu.addMenuItem(new ShowFinancialRequestsMenuItem(financialRequestManager));
 
         // Login and exit menu items.
         mainMenu.addMenuItem(new LogoutMenuItem(loginManager));

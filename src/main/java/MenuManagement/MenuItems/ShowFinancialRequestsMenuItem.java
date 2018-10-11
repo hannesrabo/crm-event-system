@@ -7,11 +7,11 @@ import Utils.InputReader;
 
 import java.util.ArrayList;
 
-public class ShowFincancialRequestsMenuItem extends MenuItem {
+public class ShowFinancialRequestsMenuItem extends MenuItem {
 
     private final FinancialRequestManager financialRequestManager;
 
-    public ShowFincancialRequestsMenuItem(FinancialRequestManager financialRequestManager) {
+    public ShowFinancialRequestsMenuItem(FinancialRequestManager financialRequestManager) {
         this.financialRequestManager = financialRequestManager;
 
         addAuthorizedRole(UserRole.FinancialManager);
