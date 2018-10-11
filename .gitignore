@@ -26,3 +26,4 @@ target/
 
 # Misc
 .settings
+.crm-event-system.iml
