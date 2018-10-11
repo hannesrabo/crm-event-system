@@ -8,6 +8,6 @@ public enum UserRole {
     ServiceDepartmentManager,
     ServiceDepartmentMember,
     ProductionDepartmentManager,
-    ProductionDepartmentMember
+    ProductionDepartmentMember,
     ProductionStaffMember
 }
