@@ -62,4 +62,8 @@ public class Task {
         this.comment = comment;
         return this;
     }
+
+    public String getName() {
+        return taskName;
+    }
 }

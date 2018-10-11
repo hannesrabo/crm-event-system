@@ -49,4 +49,8 @@ public class LoginManager {
     public UserRole getUserRole() {
         return currentUser.role;
     }
+
+    public User getUser() {
+        return currentUser;
+    }
 }

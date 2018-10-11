@@ -1,5 +1,6 @@
 import EventManagement.EventPlan;
 import EventManagement.EventPlanManager;
+import EventManagement.TaskManager;
 import MenuManagement.Menu;
 import MenuManagement.MenuItems.*;
 import UserManagement.LoginManager;
@@ -16,6 +17,7 @@ public class Main {
         loginManager.addUser("sco", "1234", UserRole.SeniorCustomerOffice);
         loginManager.addUser("fin", "1234", UserRole.FinancialManager);
         loginManager.addUser("adm", "1234", UserRole.AdministrationDepartmentManager);
+        loginManager.addUser("sdm", "1234", UserRole.ServiceDepartmentMember);
     }
 
     private static void addMenuItems(Menu mainMenu, LoginManager loginManager) {
@@ -23,6 +25,7 @@ public class Main {
 
         mainMenu.addMenuItem(new CreateEventMenuItem(eventPlanManager));
         mainMenu.addMenuItem(new ShowAllEventPlansMenuItem(eventPlanManager, loginManager));
+        mainMenu.addMenuItem(new ListUserTasks(new TaskManager(), loginManager));
 
         // Login and exit menu items.
         mainMenu.addMenuItem(new LogoutMenuItem(loginManager));
