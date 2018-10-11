@@ -31,7 +31,7 @@ public class EventPlanTest {
                 "EventPlan: testEvent\n" +
                         "--------------------\n" +
                         "Client: testClient\n" +
-                        "Type: WorkShop\n" +
+                        "Type: Workshop\n" +
                         "Attendees: 10\n" +
                         "Budget: 1234\n"+
                         "From: 2018-01-01 18:00\n" +
