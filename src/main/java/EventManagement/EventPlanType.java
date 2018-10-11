@@ -6,8 +6,7 @@ public enum EventPlanType {
 
     public static EventPlanType getEnumFromString(String str) {
         try {
-            EventPlanType eventPlanType = EventPlanType.valueOf(str);
-            return eventPlanType;
+            return EventPlanType.valueOf(str);
         } catch (IllegalArgumentException e) {
             return EventPlanType.Unknown;
         }

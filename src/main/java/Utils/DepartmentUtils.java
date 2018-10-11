@@ -8,8 +8,8 @@ public class DepartmentUtils {
         switch (role) {
             case FinancialManager:
                 return Department.Financial;
-            case ProductionManager:
-            case ProductionStaffMember:
+            case ProductionDepartmentManager:
+            case ProductionDepartmentMember:
                 return Department.Production;
             case AdministrationDepartmentManager:
             case SeniorCustomerOfficer:

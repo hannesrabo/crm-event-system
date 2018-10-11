@@ -73,8 +73,9 @@ public class EventPlan {
         return eventName;
     }
 
-    public void setStatus(EventStatus newStatus) {
+    public EventPlan setStatus(EventStatus newStatus) {
         this.status = newStatus;
+        return this;
     }
 
     public EventStatus getStatus() {

@@ -17,7 +17,7 @@ public class CreateFinancialRequestMenuItem extends MenuItem {
         this.loginManager = loginManager;
         this.financialRequestManager = financialRequestManager;
 
-        addAuthorizedRole(UserRole.ProductionManager);
+        addAuthorizedRole(UserRole.ProductionDepartmentManager);
         addAuthorizedRole(UserRole.ServiceDepartmentManager);
     }
 

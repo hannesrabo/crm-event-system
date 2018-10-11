@@ -1,5 +1,4 @@
-import EventManagement.EventPlanManager;
-import EventManagement.TaskManager;
+import EventManagement.*;
 import FinancialRequestManagment.FinancialRequestManager;
 import MenuManagement.Menu;
 import MenuManagement.MenuItems.*;
@@ -9,6 +8,7 @@ import UserManagement.UserRole;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
 
 public class Main {
 
@@ -17,18 +17,41 @@ public class Main {
         loginManager.addUser("sco", "1234", UserRole.SeniorCustomerOfficer);
         loginManager.addUser("fin", "1234", UserRole.FinancialManager);
         loginManager.addUser("adm", "1234", UserRole.AdministrationDepartmentManager);
-        loginManager.addUser("pdm", "1234", UserRole.ProductionManager);
         loginManager.addUser("sdm", "1234", UserRole.ServiceDepartmentMember);
     }
 
     private static void addMenuItems(Menu mainMenu, LoginManager loginManager) {
         EventPlanManager eventPlanManager = new EventPlanManager();
+        TaskManager taskManager = new TaskManager();
         FinancialRequestManager financialRequestManager = new FinancialRequestManager();
 
-        // Event requests
+        // DEBUG
+        EventPlan ep = new EventPlan()
+                .setEventName("test Event")
+                .setClient("test Client")
+                .setEventType(EventPlanType.WorkShop)
+                .setDates(LocalDateTime.of(2018, 01, 01, 18, 00), LocalDateTime.of(2018, 01, 02, 18, 00))
+                .setAttendees(10)
+                .setBudget(1234)
+                .setComment("AmazingStuffComment")
+                .setStatus(EventStatus.Approved);
+        eventPlanManager.add(ep);
+
+        Task t = new Task()
+                .setName("TaskName")
+                .setDescription("Description")
+                .setPriority(TaskPriority.High)
+                .assignEvent(ep)
+                .assignEmployee(loginManager.getUserFromName("sdm"))
+                .addComment("Task Comment");
+
+        taskManager.addTask(t);
+
         mainMenu.addMenuItem(new CreateEventMenuItem(eventPlanManager));
-        mainMenu.addMenuItem(new ShowAllEventPlansMenuItem(eventPlanManager, loginManager));
-        mainMenu.addMenuItem(new ListUserTasks(new TaskManager(), loginManager));
+        mainMenu.addMenuItem(new ShowEventRequestsMenuItem(eventPlanManager, loginManager));
+        mainMenu.addMenuItem(new ShowEventPlansMenuItem(eventPlanManager, loginManager, taskManager));
+        mainMenu.addMenuItem(new ListUserTasks(taskManager, loginManager));
+
 
         // Financial requests
         mainMenu.addMenuItem(new CreateFinancialRequestMenuItem(loginManager, financialRequestManager));

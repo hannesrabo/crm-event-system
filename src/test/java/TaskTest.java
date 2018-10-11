@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 import static junit.framework.TestCase.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
 public class TaskTest {
@@ -30,7 +29,7 @@ public class TaskTest {
         TaskManager tm = new TaskManager();
 
         User u1 = new User("MyName", UserRole.FinancialManager);
-        User u2 = new User("MySecondName", UserRole.ProductionManager);
+        User u2 = new User("MySecondName", UserRole.ProductionDepartmentManager);
 
         Task t = new Task()
                 .setName("TaskName")

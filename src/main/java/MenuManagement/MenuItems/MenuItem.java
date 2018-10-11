@@ -5,7 +5,7 @@ import UserManagement.UserRole;
 import java.util.ArrayList;
 
 public abstract class MenuItem {
-    private ArrayList<UserRole> authorizedRoles = new ArrayList<UserRole>();
+    private final ArrayList<UserRole> authorizedRoles = new ArrayList<>();
 
     public abstract String GetMenuItemName();
     public abstract void RunMenuItemFunction();

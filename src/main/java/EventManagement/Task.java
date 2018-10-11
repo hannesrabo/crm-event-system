@@ -9,6 +9,7 @@ public class Task {
     private User user = null;
     private String taskName = "";
     private String comment = "";
+    private TaskStatus status = TaskStatus.Active;
 
     public Task setDescription(String description) {
         this.description = description;
@@ -27,6 +28,11 @@ public class Task {
 
     public Task assignEmployee(User user) {
         this.user = user;
+        return this;
+    }
+
+    public Task setStatus(TaskStatus status) {
+        this.status = status;
         return this;
     }
 
@@ -65,5 +71,13 @@ public class Task {
 
     public String getName() {
         return taskName;
+    }
+
+    public TaskStatus getStatus() {
+        return this.status;
+    }
+
+    public TaskPriority getPriority() {
+        return priority;
     }
 }

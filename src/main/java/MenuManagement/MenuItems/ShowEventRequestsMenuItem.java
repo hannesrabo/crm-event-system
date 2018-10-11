@@ -9,11 +9,11 @@ import Utils.InputReader;
 
 import java.util.ArrayList;
 
-public class ShowAllEventPlansMenuItem extends MenuItem {
+public class ShowEventRequestsMenuItem extends MenuItem {
     private final EventPlanManager eventPlanManager;
     private final LoginManager loginManager;
 
-    public ShowAllEventPlansMenuItem(EventPlanManager eventPlanManager, LoginManager loginManager) {
+    public ShowEventRequestsMenuItem(EventPlanManager eventPlanManager, LoginManager loginManager) {
         this.eventPlanManager = eventPlanManager;
         this.loginManager = loginManager;
 
@@ -25,40 +25,34 @@ public class ShowAllEventPlansMenuItem extends MenuItem {
 
     @Override
     public String GetMenuItemName() {
-        return "Show all event plans";
+        return "Show event requests";
     }
 
     @Override
     public void RunMenuItemFunction() {
 
-        System.out.println("Event Plans: \n--------------------");
-        int index = 1;
         ArrayList<EventPlan> eventPlans = eventPlanManager.getEventPlans(loginManager.getUserRole());
 
-        if(eventPlans.size() < 1) {
-            System.out.println("No events to show.\n");
+        if (eventPlans.size() < 1) {
+            System.out.println("No events to show.");
             return;
         }
 
-        for (EventPlan e : eventPlans) {
-            System.out.println("(" +index+"): " + e.getName());
-            index++;
-        }
-
-        System.out.println();
+        System.out.println(EventPlanManager.createEventPlanListing(eventPlans));
 
         try {
-            index = Integer.parseInt(InputReader.readUserInput("Select Index"));
+            int index = Integer.parseInt(InputReader.readUserInput("Select Index"));
 
-            if (index < 0 || index > eventPlanManager.numberOfEvents()) {
+            if (index < 0 || index > eventPlans.size()) {
                 System.out.println("Index does not exist");
                 return;
             }
 
             // We use human indexing starting at 1 which means we have to subtract one here.
-            System.out.println("\n" + eventPlans.get(index - 1));
+            EventPlan eventPlan = eventPlans.get(index - 1);
 
-            editEventPlan(eventPlans.get(index - 1));
+            System.out.println("\n" + eventPlan);
+            editEventPlan(eventPlan);
 
         } catch (IllegalArgumentException e) {
             System.out.println("Not a valid index.");
@@ -120,7 +114,7 @@ public class ShowAllEventPlansMenuItem extends MenuItem {
                         throw new IllegalArgumentException();
 
                     if (choice == 1) {
-                        eventPlan.setFinancialFeedback(InputReader.readUserInput("Financial Feeback"));
+                        eventPlan.setFinancialFeedback(InputReader.readUserInput("Financial Feedback"));
                         eventPlan.setStatus(EventStatus.FinanceFeedbackGiven);
                     }
 

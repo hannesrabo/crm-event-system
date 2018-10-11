@@ -7,12 +7,12 @@ import java.util.LinkedList;
 
 public class Menu {
 
-    private LinkedList<MenuItem> menuItems;
-    public static String MENU_HEADER = "=======================\nMenu Items: \n=======================\n";
-    private LoginManager loginManager;
+    private final LinkedList<MenuItem> menuItems;
+    public static final String MENU_HEADER = "=======================\nMenu Items: \n=======================\n";
+    private final LoginManager loginManager;
 
     public Menu(LoginManager loginManager) {
-        menuItems = new LinkedList<MenuItem>();
+        menuItems = new LinkedList<>();
         this.loginManager = loginManager;
     }
 

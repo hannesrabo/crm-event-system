@@ -8,7 +8,7 @@ public class LoginManager {
     private User currentUser;
 
     public LoginManager() {
-        users = new ArrayList<User>(10);
+        users = new ArrayList<>(10);
         currentUser = null;
     }
 
@@ -52,5 +52,26 @@ public class LoginManager {
 
     public User getUser() {
         return currentUser;
+    }
+
+    public String getUserListing() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[\n");
+        for (User user: users) {
+            sb.append("\t").append(user.getName());
+            sb.append(",\n");
+        }
+        sb.append("]\n");
+        return sb.toString();
+    }
+
+    public User getUserFromName(String username) throws IllegalArgumentException{
+        for (User u: users) {
+            if (u.userName.equals(username)){
+                return u;
+            }
+        }
+
+        throw new IllegalArgumentException("User with username: " + username +" does not exist");
     }
 }

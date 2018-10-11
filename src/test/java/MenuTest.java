@@ -16,7 +16,7 @@ public class MenuTest {
         LoginManager lm = new LoginManager();
         String username = "hrabo";
         String password = "1234";
-        UserRole role = UserRole.ProductionManager;
+        UserRole role = UserRole.ProductionDepartmentManager;
 
         lm.addUser(username, password, role);
         lm.login(username, password);
@@ -41,7 +41,7 @@ public class MenuTest {
     @Test
     public void TestMenuItemRoles() {
         TestMenuItem item = new TestMenuItem();
-        assertFalse(item.isRoleAuthorized(UserRole.ProductionManager));
+        assertFalse(item.isRoleAuthorized(UserRole.ProductionDepartmentManager));
         assertTrue(item.isRoleAuthorized(UserRole.FinancialManager));
     }
 

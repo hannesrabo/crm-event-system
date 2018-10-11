@@ -17,12 +17,12 @@ public class LoginTest {
         User u1 = new User("MyName", UserRole.FinancialManager);
 
         assertEquals(u1.role, UserRole.FinancialManager);
-        assertNotEquals(u1.role, UserRole.ProductionStaffMember);
+        assertNotEquals(u1.role, UserRole.ProductionDepartmentMember);
 
-        User u2 = new User("", UserRole.ProductionManager);
+        User u2 = new User("", UserRole.ProductionDepartmentManager);
 
         assertNotEquals(u2.role, UserRole.FinancialManager);
-        assertEquals(u2.role, UserRole.ProductionManager);
+        assertEquals(u2.role, UserRole.ProductionDepartmentManager);
 
     }
 
@@ -33,7 +33,7 @@ public class LoginTest {
 
         String username = "hrabo";
         String password = "1234";
-        UserRole role = UserRole.ProductionManager;
+        UserRole role = UserRole.ProductionDepartmentManager;
 
         lm.addUser(username, password, role);
         assertTrue(lm.hasUser(username));
