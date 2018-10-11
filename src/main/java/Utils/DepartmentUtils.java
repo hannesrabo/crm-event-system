@@ -16,9 +16,10 @@ public class DepartmentUtils {
             case CustomerServiceOfficer:
                 return Department.Administration;
             case ServiceDepartmentManager:
+            case ServiceDepartmentMember:
                 return Department.Services;
         }
-        return Department.Administration;
+        return null;
     }
 
 }

@@ -18,6 +18,7 @@ public class Main {
         loginManager.addUser("fin", "1234", UserRole.FinancialManager);
         loginManager.addUser("adm", "1234", UserRole.AdministrationDepartmentManager);
         loginManager.addUser("sdm", "1234", UserRole.ServiceDepartmentMember);
+        loginManager.addUser("pdman", "1234", UserRole.ProductionDepartmentManager);
     }
 
     private static void addMenuItems(Menu mainMenu, LoginManager loginManager) {

@@ -9,4 +9,5 @@ public enum UserRole {
     ServiceDepartmentMember,
     ProductionDepartmentManager,
     ProductionDepartmentMember
+    ProductionStaffMember
 }

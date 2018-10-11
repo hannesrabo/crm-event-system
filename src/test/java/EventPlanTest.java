@@ -80,6 +80,5 @@ public class EventPlanTest {
         assertTrue(eventPlanManager.getEventPlans(UserRole.SeniorCustomerOfficer).iterator().hasNext());
         assertFalse(eventPlanManager.getEventPlans(UserRole.FinancialManager).iterator().hasNext());
         assertFalse(eventPlanManager.getEventPlans(UserRole.AdministrationDepartmentManager).iterator().hasNext());
-
     }
 }

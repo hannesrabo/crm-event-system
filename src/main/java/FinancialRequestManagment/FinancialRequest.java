@@ -45,4 +45,8 @@ public class FinancialRequest {
         this.reason = reason;
         return this;
     }
+
+    public String getName() {
+        return name;
+    }
 }

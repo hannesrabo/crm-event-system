@@ -18,4 +18,6 @@ public class FinancialRequestManager {
         return financialRequests.get(i);
     }
 
+    public ArrayList<FinancialRequest> getFinancialRequests() { return financialRequests; }
+
 }
