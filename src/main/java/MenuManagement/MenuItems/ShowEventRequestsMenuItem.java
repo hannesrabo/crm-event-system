@@ -72,7 +72,7 @@ public class ShowEventRequestsMenuItem extends MenuItem {
                     System.out.println("(1) Approve");
                     System.out.println("(2) Exit");
                     try {
-                        int choice = Integer.parseInt(InputReader.readUserInput("nr"));
+                        int choice = Integer.parseInt(InputReader.readUserInput(""));
                         if (choice != 1 && choice != 2)
                             throw new IllegalArgumentException();
 

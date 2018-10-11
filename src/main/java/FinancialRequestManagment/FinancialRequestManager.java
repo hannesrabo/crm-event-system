@@ -20,6 +20,17 @@ public class FinancialRequestManager {
         return financialRequests.get(i);
     }
 
+    private ArrayList<FinancialRequest> filterForDepartment(Department department, ArrayList<FinancialRequest> list) {
+        ArrayList<FinancialRequest> result = new ArrayList<>();
+        for (FinancialRequest f : list) {
+            if (f.getDepartment() == department) {
+                result.add(f);
+            }
+        }
+
+        return result;
+    }
+
     public ArrayList<FinancialRequest> getFinancialRequests(FinancialRequestStatus status) {
         ArrayList<FinancialRequest> result = new ArrayList<>();
         for (FinancialRequest f : financialRequests) {
@@ -40,12 +51,10 @@ public class FinancialRequestManager {
                 ArrayList<FinancialRequest> result = getFinancialRequests(FinancialRequestStatus.New);
                 result.addAll(getFinancialRequests(FinancialRequestStatus.Approved));
                 result.addAll(getFinancialRequests(FinancialRequestStatus.Rejected));
-                return result;
+                return filterForDepartment(department, result);
         }
 
         return new ArrayList<>();
     }
-
-    public ArrayList<FinancialRequest> getFinancialRequests() { return financialRequests; }
 
 }

@@ -58,5 +58,11 @@ public class FinancialRequest {
         return name;
     }
 
-    public FinancialRequestStatus getStatus() { return status; }
+    public FinancialRequestStatus getStatus() {
+        return status;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
 }
