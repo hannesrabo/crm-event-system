@@ -14,7 +14,7 @@ public class TaskTest {
         return new EventPlan()
                 .setEventName("testEvent")
                 .setClient("testClient")
-                .setEventType(EventPlanType.WorkShop)
+                .setEventType("Workshop")
                 .setDates(LocalDateTime.of(2018, 01, 01, 18, 00), LocalDateTime.of(2018, 01, 02, 18, 00))
                 .setAttendees(10)
                 .setBudget(1234)

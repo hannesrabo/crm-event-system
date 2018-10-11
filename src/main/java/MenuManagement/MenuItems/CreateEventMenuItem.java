@@ -2,9 +2,10 @@ package MenuManagement.MenuItems;
 
 import EventManagement.EventPlan;
 import EventManagement.EventPlanManager;
-import EventManagement.EventPlanType;
 import UserManagement.UserRole;
 import Utils.InputReader;
+
+import java.time.LocalDateTime;
 
 public class CreateEventMenuItem extends MenuItem {
     private final EventPlanManager eventPlanManager;
@@ -30,11 +31,14 @@ public class CreateEventMenuItem extends MenuItem {
             EventPlan ep = new EventPlan()
                 .setEventName(InputReader.readUserInput("Event name"))
                 .setClient(InputReader.readUserInput("Client Name"))
-                .setEventType(EventPlanType.getEnumFromString(InputReader.readUserInput("Event Type")))
+                .setEventType(InputReader.readUserInput("Event Type"))
                 .setAttendees(Integer.parseInt(InputReader.readUserInput("Attendees")))
                 .setBudget(Integer.parseInt(InputReader.readUserInput("Budget")))
-                .setComment(InputReader.readUserInput("Comment"));
-//                .setDates(LocalDateTime.of(2018, 01, 01, 18, 00), LocalDateTime.of(2018, 01, 02, 18, 00))
+                .setComment(InputReader.readUserInput("Comment"))
+                .setDates(
+                        LocalDateTime.parse(InputReader.readUserInput("From: ("+EventPlan.dateTimeStringFormat+")"), EventPlan.dFormat),
+                        LocalDateTime.parse(InputReader.readUserInput("To: ("+EventPlan.dateTimeStringFormat+")"), EventPlan.dFormat)
+                );
 
             eventPlanManager.add(ep);
 

@@ -7,7 +7,7 @@ import java.util.Locale;
 public class EventPlan {
     private String eventName = "";
     private String clientName = "";
-    private EventPlanType eventPlanType = EventPlanType.Unknown;
+    private String eventPlanType = "";
     private LocalDateTime eventStart = LocalDateTime.now(), eventEnd = LocalDateTime.now();
     private int attendees = 0;
     private int budget = 0;
@@ -15,10 +15,11 @@ public class EventPlan {
     private EventStatus status = EventStatus.NewEventRequest;
     private String financialFeedback = "";
 
+    public static String dateTimeStringFormat = "yyyy-MM-dd HH:mm";
+    public static DateTimeFormatter dFormat = DateTimeFormatter.ofPattern(dateTimeStringFormat, Locale.ENGLISH);
+
     @Override
     public String toString() {
-        DateTimeFormatter dFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm", Locale.ENGLISH);
-
         return String.join("",
                 "EventPlan: ",  eventName,
                 "\n--------------------\n",
@@ -43,7 +44,7 @@ public class EventPlan {
         return this;
     }
 
-    public EventPlan setEventType(EventPlanType eventPlanType) {
+    public EventPlan setEventType(String eventPlanType) {
         this.eventPlanType = eventPlanType;
         return this;
     }

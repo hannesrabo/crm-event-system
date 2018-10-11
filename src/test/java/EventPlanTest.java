@@ -1,6 +1,5 @@
 import EventManagement.EventPlan;
 import EventManagement.EventPlanManager;
-import EventManagement.EventPlanType;
 import EventManagement.EventStatus;
 import UserManagement.UserRole;
 import org.junit.Test;
@@ -17,7 +16,7 @@ public class EventPlanTest {
         return new EventPlan()
                 .setEventName("testEvent")
                 .setClient("testClient")
-                .setEventType(EventPlanType.WorkShop)
+                .setEventType("Workshop")
                 .setDates(LocalDateTime.of(2018, 01, 01, 18, 00), LocalDateTime.of(2018, 01, 02, 18, 00))
                 .setAttendees(10)
                 .setBudget(1234)
@@ -45,12 +44,6 @@ public class EventPlanTest {
         int i = eventPlanManager.add(ep);
         assertTrue(eventPlanManager.getEventPlan(i).equals(ep));
 
-    }
-
-    @Test
-    public void EventPlanTypeTest() {
-        assertEquals(EventPlanType.WorkShop, EventPlanType.getEnumFromString("WorkShop"));
-        assertEquals(EventPlanType.Unknown, EventPlanType.getEnumFromString("RandomValue"));
     }
 
     @Test

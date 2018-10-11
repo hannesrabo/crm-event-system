@@ -30,7 +30,7 @@ public class Main {
         EventPlan ep = new EventPlan()
                 .setEventName("test Event")
                 .setClient("test Client")
-                .setEventType(EventPlanType.WorkShop)
+                .setEventType("WorkShop")
                 .setDates(LocalDateTime.of(2018, 01, 01, 18, 00), LocalDateTime.of(2018, 01, 02, 18, 00))
                 .setAttendees(10)
                 .setBudget(1234)
