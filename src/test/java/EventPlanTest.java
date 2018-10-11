@@ -37,7 +37,8 @@ public class EventPlanTest {
                         "Budget: 1234\n"+
                         "From: 2018-01-01 18:00\n" +
                         "To: 2018-01-02 18:00\n" +
-                        "Comment: AmazingStuffComment\n",
+                        "Comment: AmazingStuffComment\n" +
+                        "Financial feedback: \n",
                 ep.toString());
 
         EventPlanManager eventPlanManager = new EventPlanManager();
@@ -60,23 +61,23 @@ public class EventPlanTest {
 
         ep.setStatus(EventStatus.NewEventRequest);
         assertTrue(eventPlanManager.getEventPlans(UserRole.CustomerServiceOfficer).iterator().hasNext());
-        assertTrue(eventPlanManager.getEventPlans(UserRole.SeniorCustomerOffice).iterator().hasNext());
+        assertTrue(eventPlanManager.getEventPlans(UserRole.SeniorCustomerOfficer).iterator().hasNext());
         assertFalse(eventPlanManager.getEventPlans(UserRole.FinancialManager).iterator().hasNext());
 
         ep.setStatus(EventStatus.InitiallyAccepted);
         assertFalse(eventPlanManager.getEventPlans(UserRole.CustomerServiceOfficer).iterator().hasNext());
-        assertFalse(eventPlanManager.getEventPlans(UserRole.SeniorCustomerOffice).iterator().hasNext());
+        assertFalse(eventPlanManager.getEventPlans(UserRole.SeniorCustomerOfficer).iterator().hasNext());
         assertTrue(eventPlanManager.getEventPlans(UserRole.FinancialManager).iterator().hasNext());
 
         ep.setStatus(EventStatus.FinanceFeedbackGiven);
         assertFalse(eventPlanManager.getEventPlans(UserRole.CustomerServiceOfficer).iterator().hasNext());
-        assertFalse(eventPlanManager.getEventPlans(UserRole.SeniorCustomerOffice).iterator().hasNext());
+        assertFalse(eventPlanManager.getEventPlans(UserRole.SeniorCustomerOfficer).iterator().hasNext());
         assertFalse(eventPlanManager.getEventPlans(UserRole.FinancialManager).iterator().hasNext());
         assertTrue(eventPlanManager.getEventPlans(UserRole.AdministrationDepartmentManager).iterator().hasNext());
 
         ep.setStatus(EventStatus.Approved);
         assertFalse(eventPlanManager.getEventPlans(UserRole.CustomerServiceOfficer).iterator().hasNext());
-        assertTrue(eventPlanManager.getEventPlans(UserRole.SeniorCustomerOffice).iterator().hasNext());
+        assertTrue(eventPlanManager.getEventPlans(UserRole.SeniorCustomerOfficer).iterator().hasNext());
         assertFalse(eventPlanManager.getEventPlans(UserRole.FinancialManager).iterator().hasNext());
         assertFalse(eventPlanManager.getEventPlans(UserRole.AdministrationDepartmentManager).iterator().hasNext());
 
