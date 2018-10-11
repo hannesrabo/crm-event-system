@@ -2,6 +2,7 @@ import EventManagement.*;
 import FinancialRequestManagment.FinancialRequestManager;
 import MenuManagement.Menu;
 import MenuManagement.MenuItems.*;
+import RecruitmentManagement.RecruitmentManager;
 import UserManagement.LoginManager;
 import UserManagement.UserRole;
 
@@ -20,12 +21,14 @@ public class Main {
         loginManager.addUser("sdm", "1234", UserRole.ServiceDepartmentMember);
         loginManager.addUser("pdman", "1234", UserRole.ProductionDepartmentManager);
         loginManager.addUser("sdman", "1234", UserRole.ServiceDepartmentManager);
+        loginManager.addUser("hsm", "1234", UserRole.HRStaffMember);
     }
 
     private static void addMenuItems(Menu mainMenu, LoginManager loginManager) {
         EventPlanManager eventPlanManager = new EventPlanManager();
         TaskManager taskManager = new TaskManager();
         FinancialRequestManager financialRequestManager = new FinancialRequestManager();
+        RecruitmentManager recruitmentManager = new RecruitmentManager();
 
         // DEBUG
         EventPlan ep = new EventPlan()
@@ -49,11 +52,12 @@ public class Main {
 
         taskManager.addTask(t);
 
+        // General
         mainMenu.addMenuItem(new CreateEventMenuItem(eventPlanManager));
         mainMenu.addMenuItem(new ShowEventRequestsMenuItem(eventPlanManager, loginManager));
-        mainMenu.addMenuItem(new ShowEventPlansMenuItem(eventPlanManager, loginManager, taskManager));
+        mainMenu.addMenuItem(new ShowEventPlansMenuItem(eventPlanManager, loginManager, taskManager, recruitmentManager));
         mainMenu.addMenuItem(new ListUserTasks(taskManager, loginManager));
-
+        mainMenu.addMenuItem(new ListRecruitmentRequests(loginManager, recruitmentManager));
 
         // Financial requests
         mainMenu.addMenuItem(new CreateFinancialRequestMenuItem(loginManager, financialRequestManager));

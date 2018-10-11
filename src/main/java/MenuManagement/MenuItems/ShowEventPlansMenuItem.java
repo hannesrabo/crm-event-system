@@ -1,8 +1,12 @@
 package MenuManagement.MenuItems;
 
 import EventManagement.*;
+import RecruitmentManagement.RecruitmentEmploymentForm;
+import RecruitmentManagement.RecruitmentManager;
+import RecruitmentManagement.RecruitmentRequest;
 import UserManagement.LoginManager;
 import UserManagement.UserRole;
+import Utils.DepartmentUtils;
 import Utils.InputReader;
 
 import java.util.ArrayList;
@@ -14,11 +18,13 @@ public class ShowEventPlansMenuItem extends MenuItem {
     private final EventPlanManager eventPlanManager;
     private final LoginManager loginManager;
     private final TaskManager taskManager;
+    private final RecruitmentManager recruitmentManager;
 
-    public ShowEventPlansMenuItem(EventPlanManager eventPlanManager, LoginManager loginManager, TaskManager taskManager) {
+    public ShowEventPlansMenuItem(EventPlanManager eventPlanManager, LoginManager loginManager, TaskManager taskManager, RecruitmentManager recruitmentManager) {
         this.eventPlanManager = eventPlanManager;
         this.loginManager = loginManager;
         this.taskManager = taskManager;
+        this.recruitmentManager = recruitmentManager;
 
         addAuthorizedRole(UserRole.ProductionDepartmentManager);
         addAuthorizedRole(UserRole.ServiceDepartmentManager);
@@ -68,31 +74,56 @@ public class ShowEventPlansMenuItem extends MenuItem {
     private void updateEventPlan(EventPlan eventPlan) {
         System.out.println("(1) Create new task");
         System.out.println("(2) List all tasks");
-        System.out.println("(3) Exit");
+        System.out.println("(3) Create financial request");
+        System.out.println("(4) Exit");
         try {
             int choice = Integer.parseInt(readUserInput(""));
-            if (choice != 1 && choice != 2 && choice != 3)
+            if (choice < 1 || choice > 4)
                 throw new IllegalArgumentException();
 
-            if (choice == 1) {
-                System.out.println("Create new task:\n--------------------");
-                taskManager.addTask(new Task()
-                        .setName(readUserInput("Name"))
-                        .setDescription(readUserInput("Description"))
-                        .setPriority(TaskPriority.valueOf(InputReader.readUserInput("Priority (High, Medium, Low)")))
-                        .assignEmployee(
-                                loginManager.getUserFromName(
-                                        InputReader.readUserInput("Username: " + loginManager.getUserListing())
-                                )
+            switch (choice) {
+                case 1: // Create task
+                    System.out.println("Create new task:\n--------------------");
+                    taskManager.addTask(new Task()
+                            .setName(readUserInput("Name"))
+                            .setDescription(readUserInput("Description"))
+                            .setPriority(TaskPriority.valueOf(InputReader.readUserInput("Priority (High, Medium, Low)")))
+                            .assignEmployee(
+                                    loginManager.getUserFromName(
+                                            InputReader.readUserInput("Username: " + loginManager.getUserListing())
+                                    )
                             )
-                        .assignEvent(eventPlan)
-                        );
-            } else if (choice == 2) {
-                if (taskManager.getEventTasks(eventPlan).size() < 1) {
-                    System.out.println("No tasks to show.");
-                } else {
-                    System.out.println(taskManager.getEventTaskListing(eventPlan));
-                }
+                            .assignEvent(eventPlan)
+                    );
+                    // Re-run as we may want to add more tasks
+                    updateEventPlan(eventPlan);
+                    break;
+                case 2: // List tasks
+                    if (taskManager.getEventTasks(eventPlan).size() < 1) {
+                        System.out.println("No tasks to show.");
+                    } else {
+                        System.out.println(taskManager.getEventTaskListing(eventPlan));
+                    }
+                    break;
+                case 3: // Create recruitment request
+                    System.out.println("Creating New Recruitment Request:\n------------------");
+                    recruitmentManager.addNewRecruitmentRequest(
+                            new RecruitmentRequest()
+                                .setTitle(InputReader.readUserInput("Title"))
+                                .setRequestingDeparment(DepartmentUtils.roleToDepartment(loginManager.getUserRole()))
+                                .setUser(loginManager.getUser())
+                                .setEventPlan(eventPlan)
+                                .setEmploymentForm(
+                                        RecruitmentEmploymentForm.valueOf(InputReader.readUserInput(
+                                                "Recruitment Form: " + RecruitmentEmploymentForm.createListing()
+                                        ))
+                                )
+                                .setRequiredExperienceYears(
+                                        Integer.parseInt(InputReader.readUserInput("Required experience (years)"))
+                                )
+                                .setDescription(InputReader.readUserInput("Description"))
+                    );
+                    break;
             }
 
         } catch (IllegalArgumentException e) {

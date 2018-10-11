@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 
 public class EventPlanTest {
 
-    private EventPlan getNew() {
+    public static EventPlan getNewEventPlan() {
         return new EventPlan()
                 .setEventName("testEvent")
                 .setClient("testClient")
@@ -25,7 +25,7 @@ public class EventPlanTest {
 
     @Test
     public void CreateEventPlanTest() {
-        EventPlan ep = getNew();
+        EventPlan ep = getNewEventPlan();
 
         assertEquals(
                 "EventPlan: testEvent\n" +
@@ -48,7 +48,7 @@ public class EventPlanTest {
 
     @Test
     public void EventStatusTest() {
-        EventPlan ep = getNew();
+        EventPlan ep = getNewEventPlan();
         EventPlanManager eventPlanManager = new EventPlanManager();
         eventPlanManager.add(ep);
 

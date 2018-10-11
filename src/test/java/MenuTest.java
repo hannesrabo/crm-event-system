@@ -12,26 +12,9 @@ import static org.junit.Assert.assertTrue;
 
 public class MenuTest {
 
-    private LoginManager createLoginManager () {
-        LoginManager lm = new LoginManager();
-        String username = "hrabo";
-        String password = "1234";
-        UserRole role = UserRole.ProductionDepartmentManager;
-
-        lm.addUser(username, password, role);
-        lm.login(username, password);
-
-        username = "jcelik";
-        password = "5678";
-
-        lm.addUser(username, password, UserRole.FinancialManager);
-
-        return lm;
-    }
-
     @Test
     public void TestPrintMenuItems() {
-        LoginManager lm = createLoginManager();
+        LoginManager lm = LoginTest.createLoginManager();
         Menu m = new Menu(lm);
         String s = m.toString();
 
@@ -47,7 +30,7 @@ public class MenuTest {
 
     @Test
     public void TestRoles() {
-        LoginManager lm = createLoginManager();
+        LoginManager lm = LoginTest.createLoginManager();
         TestMenuItem item = new TestMenuItem();
 
         Menu m = new Menu(lm);
@@ -62,7 +45,7 @@ public class MenuTest {
 
     @Test
     public void TestRunFunction() {
-        LoginManager lm = createLoginManager();
+        LoginManager lm = LoginTest.createLoginManager();
         TestMenuItem item = new TestMenuItem();
 
         Menu m = new Menu(lm);
@@ -80,7 +63,7 @@ public class MenuTest {
 
     @Test
     public void TestLogoutMenuItem() {
-        LoginManager lm = createLoginManager();
+        LoginManager lm = LoginTest.createLoginManager();
         LogoutMenuItem mi = new LogoutMenuItem(lm);
 
         Menu m = new Menu(lm);

@@ -12,6 +12,23 @@ import static org.junit.Assert.assertFalse;
 
 public class LoginTest {
 
+    public static LoginManager createLoginManager() {
+        LoginManager lm = new LoginManager();
+        String username = "hrabo";
+        String password = "1234";
+        UserRole role = UserRole.ProductionDepartmentManager;
+
+        lm.addUser(username, password, role);
+        lm.login(username, password);
+
+        username = "jcelik";
+        password = "5678";
+
+        lm.addUser(username, password, UserRole.FinancialManager);
+
+        return lm;
+    }
+
     @Test
     public void TestUserHasRole() {
         User u1 = new User("MyName", UserRole.FinancialManager);
