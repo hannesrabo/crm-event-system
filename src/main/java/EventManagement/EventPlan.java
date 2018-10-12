@@ -83,7 +83,8 @@ public class EventPlan {
         return this.status;
     }
 
-    public void setFinancialFeedback(String financialFeedback) {
+    public EventPlan setFinancialFeedback(String financialFeedback) {
         this.financialFeedback = financialFeedback;
+        return this;
     }
 }

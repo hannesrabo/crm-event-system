@@ -6,7 +6,7 @@
 
     <groupId>se.haj</groupId>
     <artifactId>crm-event-system</artifactId>
-    <version>2.1-RELEASE</version>
+    <version>2.2-RELEASE</version>
     <build>
         <plugins>
             <plugin>
