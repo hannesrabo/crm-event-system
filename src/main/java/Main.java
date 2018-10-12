@@ -1,9 +1,12 @@
 import EventManagement.*;
+import FinancialRequestManagment.FinancialRequest;
 import FinancialRequestManagment.FinancialRequestManager;
+import FinancialRequestManagment.FinancialRequestStatus;
 import MenuManagement.Menu;
 import MenuManagement.MenuItems.*;
 import UserManagement.LoginManager;
 import UserManagement.UserRole;
+import Utils.Department;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,23 +16,23 @@ import java.time.LocalDateTime;
 public class Main {
 
     private static void addUserLogins(LoginManager loginManager) {
-        loginManager.addUser("cso", "1234", UserRole.CustomerServiceOfficer);
-        loginManager.addUser("sco", "1234", UserRole.SeniorCustomerOfficer);
-        loginManager.addUser("fin", "1234", UserRole.FinancialManager);
-        loginManager.addUser("adm", "1234", UserRole.AdministrationDepartmentManager);
-        loginManager.addUser("sdm", "1234", UserRole.ServiceDepartmentMember);
+        loginManager.addUser("cso1", "1234", UserRole.CustomerServiceOfficer);
+        loginManager.addUser("cso2", "1234", UserRole.CustomerServiceOfficer);
+        loginManager.addUser("scso", "1234", UserRole.SeniorCustomerOfficer);
+        loginManager.addUser("finman", "1234", UserRole.FinancialManager);
+        loginManager.addUser("admam", "1234", UserRole.AdministrationDepartmentManager);
+        loginManager.addUser("sdmem1", "1234", UserRole.ServiceDepartmentMember);
+        loginManager.addUser("sdmem2", "1234", UserRole.ServiceDepartmentMember);
+        loginManager.addUser("sdmem3", "1234", UserRole.ServiceDepartmentMember);
         loginManager.addUser("pdman", "1234", UserRole.ProductionDepartmentManager);
-        loginManager.addUser("pdmem", "1234", UserRole.ProductionDepartmentMember);
+        loginManager.addUser("pdmem1", "1234", UserRole.ProductionDepartmentMember);
+        loginManager.addUser("pdmem2", "1234", UserRole.ProductionDepartmentMember);
+        loginManager.addUser("pdmem3", "1234", UserRole.ProductionDepartmentMember);
         loginManager.addUser("sdman", "1234", UserRole.ServiceDepartmentManager);
     }
 
-    private static void addMenuItems(Menu mainMenu, LoginManager loginManager) {
-        EventPlanManager eventPlanManager = new EventPlanManager();
-        TaskManager taskManager = new TaskManager();
-        FinancialRequestManager financialRequestManager = new FinancialRequestManager();
-
-        // DEBUG
-        EventPlan ep = new EventPlan()
+    private static void fillSystem(LoginManager loginManager, EventPlanManager eventPlanManager, TaskManager taskManager, FinancialRequestManager financialRequestManager) {
+        EventPlan ep1 = new EventPlan()
                 .setEventName("test Event")
                 .setClient("test Client")
                 .setEventType("WorkShop")
@@ -38,23 +41,69 @@ public class Main {
                 .setBudget(1234)
                 .setComment("AmazingStuffComment")
                 .setStatus(EventStatus.Approved);
-        eventPlanManager.add(ep);
+        eventPlanManager.add(ep1);
+
+        EventPlan ep2 = new EventPlan()
+                .setEventName("Other event")
+                .setClient("KTH")
+                .setEventType("Dinner")
+                .setDates(LocalDateTime.of(2018, 01, 01, 18, 00), LocalDateTime.of(2018, 01, 02, 18, 00))
+                .setAttendees(8)
+                .setBudget(3000)
+                .setComment("They need food")
+                .setFinancialFeedback("The budget looks good")
+                .setStatus(EventStatus.FinanceFeedbackGiven);
+        eventPlanManager.add(ep2);
 
         Task t = new Task()
                 .setName("TaskName")
                 .setDescription("Description")
                 .setPriority(TaskPriority.High)
-                .assignEvent(ep)
-                .assignEmployee(loginManager.getUserFromName("sdm"))
+                .assignEvent(ep1)
+                .assignEmployee(loginManager.getUserFromName("sdmem1"))
                 .addComment("Task Comment");
-
         taskManager.addTask(t);
+
+        FinancialRequest fr1 = new FinancialRequest()
+                .setDepartment(Department.Production)
+                .setName("Music")
+                .setProjectReference("Other event")
+                .setReason("They need more music!")
+                .setRequiredAmount(500)
+                .setStatus(FinancialRequestStatus.New);
+
+        FinancialRequest fr2 = new FinancialRequest()
+                .setDepartment(Department.Production)
+                .setName("Drinks")
+                .setProjectReference("Other event")
+                .setReason("They need more drinks!")
+                .setRequiredAmount(200)
+                .setStatus(FinancialRequestStatus.Approved);
+
+        FinancialRequest fr3 = new FinancialRequest()
+                .setDepartment(Department.Production)
+                .setName("Balloons")
+                .setProjectReference("test Event")
+                .setReason("They need more Balloons!")
+                .setRequiredAmount(5000)
+                .setStatus(FinancialRequestStatus.Rejected);
+
+        financialRequestManager.add(fr1);
+        financialRequestManager.add(fr2);
+        financialRequestManager.add(fr3);
+    }
+
+    private static void addMenuItems(Menu mainMenu, LoginManager loginManager) {
+        EventPlanManager eventPlanManager = new EventPlanManager();
+        TaskManager taskManager = new TaskManager();
+        FinancialRequestManager financialRequestManager = new FinancialRequestManager();
+
+        fillSystem(loginManager, eventPlanManager, taskManager, financialRequestManager);
 
         mainMenu.addMenuItem(new CreateEventMenuItem(eventPlanManager));
         mainMenu.addMenuItem(new ShowEventRequestsMenuItem(eventPlanManager, loginManager));
         mainMenu.addMenuItem(new ShowEventPlansMenuItem(eventPlanManager, loginManager, taskManager));
         mainMenu.addMenuItem(new ListUserTasks(taskManager, loginManager));
-
 
         // Financial requests
         mainMenu.addMenuItem(new CreateFinancialRequestMenuItem(loginManager, financialRequestManager));
