@@ -19,6 +19,7 @@ public class Main {
         loginManager.addUser("adm", "1234", UserRole.AdministrationDepartmentManager);
         loginManager.addUser("sdm", "1234", UserRole.ServiceDepartmentMember);
         loginManager.addUser("pdman", "1234", UserRole.ProductionDepartmentManager);
+        loginManager.addUser("pdmem", "1234", UserRole.ProductionDepartmentMember);
         loginManager.addUser("sdman", "1234", UserRole.ServiceDepartmentManager);
     }
 

@@ -58,8 +58,8 @@ public class ShowEventPlansMenuItem extends MenuItem {
             // Menu
             updateEventPlan(selectedEventPlan);
 
-        } catch (IllegalArgumentException e) {
-            System.out.println("Not a valid index.");
+        } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
+            System.out.println("Not a valid index");
         }
 
 
@@ -75,6 +75,10 @@ public class ShowEventPlansMenuItem extends MenuItem {
                 throw new IllegalArgumentException();
 
             if (choice == 1) {
+                ArrayList<UserRole> roles = new ArrayList<>();
+                roles.add(UserRole.ProductionDepartmentMember);
+                roles.add(UserRole.ServiceDepartmentMember);
+
                 System.out.println("Create new task:\n--------------------");
                 taskManager.addTask(new Task()
                         .setName(readUserInput("Name"))
@@ -82,7 +86,7 @@ public class ShowEventPlansMenuItem extends MenuItem {
                         .setPriority(TaskPriority.valueOf(InputReader.readUserInput("Priority (High, Medium, Low)")))
                         .assignEmployee(
                                 loginManager.getUserFromName(
-                                        InputReader.readUserInput("Username: " + loginManager.getUserListing())
+                                        InputReader.readUserInput("Username: " + loginManager.getUserListing(roles))
                                 )
                             )
                         .assignEvent(eventPlan)
@@ -96,7 +100,7 @@ public class ShowEventPlansMenuItem extends MenuItem {
             }
 
         } catch (IllegalArgumentException e) {
-            System.out.println("Not a valid input. Try again");
+            System.out.println("Not a valid input");
         }
     }
 }

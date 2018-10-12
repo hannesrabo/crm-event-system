@@ -6,6 +6,7 @@ import UserManagement.UserRole;
 import Utils.InputReader;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 public class CreateEventMenuItem extends MenuItem {
     private final EventPlanManager eventPlanManager;
@@ -34,16 +35,16 @@ public class CreateEventMenuItem extends MenuItem {
                 .setEventType(InputReader.readUserInput("Event Type"))
                 .setAttendees(Integer.parseInt(InputReader.readUserInput("Attendees")))
                 .setBudget(Integer.parseInt(InputReader.readUserInput("Budget")))
-                .setComment(InputReader.readUserInput("Comment"))
                 .setDates(
                         LocalDateTime.parse(InputReader.readUserInput("From: ("+EventPlan.dateTimeStringFormat+")"), EventPlan.dFormat),
                         LocalDateTime.parse(InputReader.readUserInput("To: ("+EventPlan.dateTimeStringFormat+")"), EventPlan.dFormat)
-                );
+                )
+                .setComment(InputReader.readUserInput("Comment"));
 
             eventPlanManager.add(ep);
 
-        } catch (IllegalArgumentException e) {
-            System.out.println("Invalid Number.");
+        } catch (IllegalArgumentException | DateTimeParseException e) {
+            System.out.println("Invalid input");
         }
     }
 }

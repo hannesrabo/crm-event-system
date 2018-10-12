@@ -65,7 +65,7 @@ public class ShowFinancialRequestsMenuItem extends MenuItem {
             }
 
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
-            System.out.println("Not a valid index.");
+            System.out.println("Not a valid index");
             return;
         }
     }
@@ -87,7 +87,7 @@ public class ShowFinancialRequestsMenuItem extends MenuItem {
             }
 
         } catch (IllegalArgumentException e) {
-            System.out.println("Not a valid number.");
+            System.out.println("Not a valid input");
         }
     }
 }

@@ -29,7 +29,6 @@ public class ListUserTasks extends MenuItem {
 
     @Override
     public void RunMenuItemFunction() {
-        int index = 1;
         ArrayList<Task> tasks = taskManager.getUserTasks(loginManager.getUser());
 
         if (tasks.size() < 1) {

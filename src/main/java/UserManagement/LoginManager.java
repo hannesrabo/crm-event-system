@@ -54,12 +54,14 @@ public class LoginManager {
         return currentUser;
     }
 
-    public String getUserListing() {
+    public String getUserListing(ArrayList<UserRole> roles) {
         StringBuilder sb = new StringBuilder();
         sb.append("[\n");
         for (User user: users) {
-            sb.append("\t").append(user.getName());
-            sb.append(",\n");
+            if (roles.contains(user.role)) {
+                sb.append("\t").append(user.getName());
+                sb.append(",\n");
+            }
         }
         sb.append("]\n");
         return sb.toString();

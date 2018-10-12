@@ -40,7 +40,7 @@ public class CreateFinancialRequestMenuItem extends MenuItem {
 
             financialRequestManager.add(request);
         } catch (IllegalArgumentException e) {
-            System.out.println("Invalid Number.");
+            System.out.println("Invalid input");
         }
     }
 }
