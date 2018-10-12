@@ -29,7 +29,7 @@ public class CreateEventMenuItem extends MenuItem {
                 "------------------------");
 
         try {
-            EventPlan ep = new EventPlan()
+            eventPlanManager.add( new EventPlan()
                 .setEventName(InputReader.readUserInput("Event name"))
                 .setClient(InputReader.readUserInput("Client Name"))
                 .setEventType(InputReader.readUserInput("Event Type"))
@@ -39,9 +39,8 @@ public class CreateEventMenuItem extends MenuItem {
                         LocalDateTime.parse(InputReader.readUserInput("From: ("+EventPlan.dateTimeStringFormat+")"), EventPlan.dFormat),
                         LocalDateTime.parse(InputReader.readUserInput("To: ("+EventPlan.dateTimeStringFormat+")"), EventPlan.dFormat)
                 )
-                .setComment(InputReader.readUserInput("Comment"));
-
-            eventPlanManager.add(ep);
+                .setComment(InputReader.readUserInput("Comment"))
+            );
 
         } catch (IllegalArgumentException | DateTimeParseException e) {
             System.out.println("Invalid input");

@@ -40,7 +40,7 @@ public class Main {
         RecruitmentManager recruitmentManager = new RecruitmentManager();
 
         // DEBUG
-        EventPlan ep = new EventPlan()
+        EventPlan ep1 = new EventPlan()
                 .setEventName("test Event")
                 .setClient("test Client")
                 .setEventType("WorkShop")

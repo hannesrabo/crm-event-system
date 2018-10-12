@@ -74,14 +74,12 @@ public class ShowEventPlansMenuItem extends MenuItem {
     private void updateEventPlan(EventPlan eventPlan) {
         System.out.println("(1) Create new task");
         System.out.println("(2) List all tasks");
-        System.out.println("(3) Create financial request");
+        System.out.println("(3) Create new recruitment request");
         System.out.println("(4) Exit");
         try {
             int choice = Integer.parseInt(readUserInput(""));
             if (choice < 1 || choice > 4)
                 throw new IllegalArgumentException();
-
-            if (choice == 1) {
 
             switch (choice) {
                 case 1: // Create task
@@ -97,6 +95,7 @@ public class ShowEventPlansMenuItem extends MenuItem {
                             .assignEmployee(
                                     loginManager.getUserFromName(
                                             InputReader.readUserInput("Username: " + loginManager.getUserListing(roles))
+                                    )
                             )
                     );
                     // Re-run as we may want to add more tasks
